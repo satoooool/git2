@@ -5,7 +5,7 @@ import sys
 
 
 def matching(src, tmp, mask):
-    result = cv2.matchTemplate(src, tmp, cv2.TM_CCORR_NORMED)
+    result = cv2.matchTemplate(src, tmp, cv2.TM_CCORR_NORMED, mask=mask)
     # _best, _, _bestPos, _ = cv2.minMaxLoc(result)  # min
     _, _best, _, _bestPos = cv2.minMaxLoc(result)  # max
     return _best, _bestPos
@@ -18,8 +18,8 @@ tmps_path = glob.glob(level + "/*.ppm")
 srcs_name = [src.split("/")[2][0:-4] for src in srcs_path]
 tmps_name = [tmp.split("/")[1][0:-4] for tmp in tmps_path]
 
-src = [cv2.imread(src) for src in srcs_path]
-tmp = [[cv2.imread(tmp)] for tmp in tmps_path]
+src = [cv2.imread(src,0) for src in srcs_path]
+tmp = [[cv2.imread(tmp,0)] for tmp in tmps_path]
 
 num = 6
 
